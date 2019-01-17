@@ -7,6 +7,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity
+ * @ORM\Table(
+ *     name="`user`",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(columns={"username"})
+ *     }
+ * )
  */
 class User implements UserInterface, \Serializable
 {
@@ -18,16 +24,11 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
-
-    /**
      * @var string
      *
      * @ORM\Column
      */
-    private $email;
+    private $username;
 
     /**
      * @var string
@@ -62,26 +63,9 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * Removes sensitive data from the user.
-     *
-     * This is important if, at any given point, sensitive information like
-     * the plain-text password is stored on this object.
-     */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-        return $this;
+        // Nothing unecrypted on the Entity :)
     }
 
     public function getId(): ?int
@@ -97,18 +81,6 @@ class User implements UserInterface, \Serializable
     public function setInvalidPasswordAttemptCount(int $invalidPasswordAttemptCount): self
     {
         $this->invalidPasswordAttemptCount = $invalidPasswordAttemptCount;
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
         return $this;
     }
 
@@ -133,9 +105,15 @@ class User implements UserInterface, \Serializable
         return null;
     }
 
-    public function getUsername()
+    public function getUsername(): string
     {
-        return $this->email;
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+        return $this;
     }
 
     public function removeRole(string $role): self
@@ -151,11 +129,11 @@ class User implements UserInterface, \Serializable
 
     public function serialize()
     {
-        return serialize([$this->id, $this->email, $this->password]);
+        return serialize([$this->id, $this->username, $this->password]);
     }
 
     public function unserialize($serialized)
     {
-        list($this->id, $this->email, $this->password) = unserialize($serialized);
+        list($this->id, $this->username, $this->password) = unserialize($serialized);
     }
 }
