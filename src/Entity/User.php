@@ -51,6 +51,13 @@ class User implements UserInterface, \Serializable
      */
     private $invalidPasswordAttemptCount;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(nullable=true)
+     */
+    private $apiToken;
+
     public function __construct()
     {
         $this->roles = [];
@@ -66,6 +73,17 @@ class User implements UserInterface, \Serializable
     public function eraseCredentials()
     {
         // Nothing unecrypted on the Entity :)
+    }
+
+    public function getApiToken(): string
+    {
+        return $this->apiToken;
+    }
+
+    public function setApiToken(string $apiToken): self
+    {
+        $this->apiToken = $apiToken;
+        return $this;
     }
 
     public function getId(): ?int
