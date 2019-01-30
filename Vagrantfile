@@ -16,5 +16,5 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "mortgage-tracker.wip"
   config.vm.synced_folder ".", "/var/www", :mount_options => ["dmode=777", "fmode=777"]
 
-  config.vm.provision "shell", keep_color: true, privileged: false, inline: "npm install -g npm-check"
+  config.vm.provision "shell", keep_color: true, privileged: false, inline: "npm install -g npm-check heroku"
 end
