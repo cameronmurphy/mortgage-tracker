@@ -5,9 +5,7 @@ namespace App\Command;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -43,10 +41,10 @@ class CreateUserCommand extends Command
     {
         $helper = $this->getHelper('question');
 
-        $usernameQuestion = new Question('<question>Username:</question>  ');
+        $usernameQuestion = new Question('<question>Username:</question> ');
         $username = $helper->ask($input, $output, $usernameQuestion);
 
-        $passwordQuestion = new Question('<question>Password:</question>  ');
+        $passwordQuestion = new Question('<question>Password:</question> ');
         $passwordQuestion->setHidden(true);
         $passwordQuestion->setHiddenFallback(false);
 
@@ -58,12 +56,12 @@ class CreateUserCommand extends Command
 
         $user->setPassword($encodedPassword);
 
-        $apiTokenQuestion = new Question('<question>API token:</question> ');
+        $apiTokenQuestion = new Question('<question>API key:</question>  ');
         $apiTokenQuestion->setHidden(true);
         $apiTokenQuestion->setHiddenFallback(false);
         $apiToken = $helper->ask($input, $output, $apiTokenQuestion);
 
-        $user->setApiToken($apiToken);
+        $user->setApiKey($apiToken);
 
         $user->addRole('ROLE_ADMINISTRATOR');
 

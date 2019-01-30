@@ -39,15 +39,15 @@ class ApiAuthenticator extends AbstractGuardAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $apiToken = $credentials['token'];
+        $apiKey = $credentials['token'];
 
-        if (null === $apiToken) {
+        if (null === $apiKey) {
             return null;
         }
 
         // if a User object, checkCredentials() is called
         return $this->entityManager->getRepository(User::class)
-            ->findOneBy(['apiToken' => $apiToken]);
+            ->findOneBy(['apiKey' => $apiKey]);
     }
 
     public function checkCredentials($credentials, UserInterface $user)

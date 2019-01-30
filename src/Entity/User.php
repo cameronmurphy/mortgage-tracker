@@ -56,7 +56,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(nullable=true)
      */
-    private $apiToken;
+    private $apiKey;
 
     public function __construct()
     {
@@ -75,14 +75,14 @@ class User implements UserInterface, \Serializable
         // Nothing unecrypted on the Entity :)
     }
 
-    public function getApiToken(): string
+    public function getApiKey(): string
     {
-        return $this->apiToken;
+        return $this->apiKey;
     }
 
-    public function setApiToken(string $apiToken): self
+    public function setApiKey(string $apiKey): self
     {
-        $this->apiToken = $apiToken;
+        $this->apiKey = $apiKey;
         return $this;
     }
 
