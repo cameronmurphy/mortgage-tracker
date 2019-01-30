@@ -65,7 +65,7 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "compile": [
-            "node_modules/.bin/encore production --progress"
+            "npm run build"
         ],
         "post-install-cmd": [
             "@auto-scripts"
