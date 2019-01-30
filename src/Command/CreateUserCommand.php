@@ -12,9 +12,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class AddUserCommand extends Command
+class CreateUserCommand extends Command
 {
-    protected static $defaultName = 'app:add-user';
+    protected static $defaultName = 'app:create-user';
 
     /**
      * @var UserPasswordEncoderInterface
@@ -36,31 +36,34 @@ class AddUserCommand extends Command
 
     protected function configure()
     {
-        $this
-            ->setDescription('Add a short description for your command')
-            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
-            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
-        ;
+        $this->setDescription('Creates a user in the database');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $helper = $this->getHelper('question');
 
-        $emailQuestion = new Question('<question>Username:</question> ');
-        $email = $helper->ask($input, $output, $emailQuestion);
+        $usernameQuestion = new Question('<question>Username:</question>  ');
+        $username = $helper->ask($input, $output, $usernameQuestion);
 
-        $passwordQuestion = new Question('<question>Password:</question> ');
+        $passwordQuestion = new Question('<question>Password:</question>  ');
         $passwordQuestion->setHidden(true);
         $passwordQuestion->setHiddenFallback(false);
 
         $user = new User();
-        $user->setUsername($email);
+        $user->setUsername($username);
 
         $password = $helper->ask($input, $output, $passwordQuestion);
         $encodedPassword = $this->passwordEncoder->encodePassword($user, $password);
 
         $user->setPassword($encodedPassword);
+
+        $apiTokenQuestion = new Question('<question>API token:</question> ');
+        $apiTokenQuestion->setHidden(true);
+        $apiTokenQuestion->setHiddenFallback(false);
+        $apiToken = $helper->ask($input, $output, $apiTokenQuestion);
+
+        $user->setApiToken($apiToken);
 
         $user->addRole('ROLE_ADMINISTRATOR');
 
