@@ -4,8 +4,8 @@
   {% for log in logs %}
     <div class="log">
       <span class="date">{{ log.date|date('d/m/Y') }}</span>
-      <span class="loan-balance">{{ log.loanBalance|number_format }}</span>
-      <span class="offset-balance">{{ log.offsetBalance|number_format }}</span>
+      <span class="loan-balance">{{ log.loanBalance|number_format(2) }}</span>
+      <span class="offset-balance">{{ log.offsetBalance|number_format(2) }}</span>
     </div>
   {% endfor %}
 {% endblock %}
