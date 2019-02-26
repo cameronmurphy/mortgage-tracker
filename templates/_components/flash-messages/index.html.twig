@@ -1,0 +1,13 @@
+{% for label, messages in app.flashes(['success', 'error']) %}
+  {% for message in messages %}
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        {{ include('_components/alert:index.html.twig', {
+          'style': label == 'error' ? 'danger' : label,
+          'exclamation': label|capitalize,
+          'message': message
+        }, with_context = false) }}
+      </div>
+    </div>
+  {% endfor %}
+{% endfor %}

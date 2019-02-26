@@ -1,36 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}{{ parent() }} - Login{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('security') }}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {{ encore_entry_script_tags('security') }}
+{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+  <div class="container">
+    <div class="row heading-row">
+      <div class="col heading-col">
+        <h1 class="brand-heading">Mortgage Tracker</h1>
+      </div>
+    </div>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername" class="sr-only">Username</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    {{ include('_components/flash-messages/index.html.twig') }}
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+    <div class="row">
+      <div class="col col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+        <form method="post">
+          {% if error %}
+            {% set errorMessage = error.messageKey|trans(error.messageData, 'security') %}
+            {{ include('_components/alert/index.html.twig', {
+              'style': 'danger',
+              'exclamation': 'Error',
+              'message': errorMessage
+            }, with_context = false) }}
+          {% endif %}
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
+          <div class="form-group">
+            <input type="email" value="{{ last_username }}" name="username" class="form-control" placeholder="Email" required autofocus>
+          </div>
+          <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
+          </div>
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+          <button class="btn btn-lg btn-pill btn-outline-primary submit-button" type="submit">
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 {% endblock %}

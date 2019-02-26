@@ -1,0 +1,29 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+}
+
+.container {
+  align-self: center;
+}
+
+.brand-heading {
+  font-weight: bold;
+}
+
+.heading-row {
+  margin-bottom: 1rem;
+}
+
+.heading-col {
+  text-align: center;
+}
+
+.submit-button {
+  margin-top: 1rem;
+  width: 100%;
+}
