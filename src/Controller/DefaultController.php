@@ -16,7 +16,11 @@ class DefaultController extends AbstractController
      */
     public function index(): Response
     {
-        $logs = $this->getDoctrine()->getRepository(BalanceLog::class)->findAll();
+        $logs = $this->getDoctrine()->getRepository(BalanceLog::class)
+            ->createQueryBuilder('b')
+            ->orderBy('b.date')
+            ->getQuery()
+            ->getResult();
 
         return $this->render('default/index.html.twig', ['logs' => $logs]);
     }
