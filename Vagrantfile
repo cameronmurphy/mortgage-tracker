@@ -5,16 +5,16 @@ Vagrant.configure("2") do |config|
 
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
-  config.hostmanager.ip_resolver = proc do |vm, resolving_vm|
+  config.hostmanager.ip_resolver = proc do |vm|
     if vm.id
-      `VBoxManage guestproperty get #{vm.id} "/VirtualBox/GuestInfo/Net/1/V4/IP"`.split()[1]
+      `VBoxManage guestproperty get #{vm.id} "/VirtualBox/GuestInfo/Net/1/V4/IP"`.split[1]
     end
   end
 
   config.vm.box = "camurphy/cappuccino"
   config.vm.network "private_network", type: "dhcp"
   config.vm.hostname = "mortgage-tracker.wip"
-  config.vm.synced_folder ".", "/var/www", :mount_options => ["dmode=777", "fmode=777"]
+  config.vm.synced_folder ".", "/var/www", :mount_options => %w(dmode=777 fmode=777)
 
   config.vm.provision "shell", keep_color: true, privileged: false, inline: "npm install -g npm-check heroku"
 end
