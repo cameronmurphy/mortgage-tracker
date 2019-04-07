@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+  {{- encore_entry_script_tags('default') -}}
+{% endblock %}
+
 {% block body %}
-  {% for log in logs %}
-    <div class="log">
-      <span class="date">{{ log.date|date('d/m/Y') }}</span>
-      <span class="loan-balance">{{ log.loanBalance|number_format(2) }}</span>
-      <span class="offset-balance">{{ log.offsetBalance|number_format(2) }}</span>
-      <span class="interest-payable-balance">{{ (log.loanBalance - log.offsetBalance)|number_format(2) }}</span>
+  <div class="d-flex justify-content-center">
+    <div class="chart-container" style="position: relative; width:97vw">
+      <canvas id="chart"></canvas>
     </div>
-  {% endfor %}
+  </div>
 {% endblock %}
