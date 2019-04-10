@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@symfony/webpack-encore": "^0.26.0",
+    "@symfony/webpack-encore": "^0.27.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "webpack-notifier": "^1.7.0"
@@ -19,7 +19,7 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.0",
     "lodash": "^4.17.11"
   }
 }
