@@ -15,9 +15,12 @@ Encore
 
   .enableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
-  .enableBuildNotifications()
   .enableSourceMaps(!Encore.isProduction())
   .enableVersioning(Encore.isProduction())
+  .configureBabel(() => {}, {
+    useBuiltIns: 'usage',
+    corejs: 3
+  })
   .enableSassLoader()
 ;
 
