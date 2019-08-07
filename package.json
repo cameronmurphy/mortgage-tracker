@@ -14,8 +14,8 @@
     "build": "encore production --progress"
   },
   "engines": {
-    "node": "10.16.0",
-    "npm": "6.10.1"
+    "node": "10.16.2",
+    "npm": "6.10.3"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
