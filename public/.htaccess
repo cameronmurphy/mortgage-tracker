@@ -21,7 +21,7 @@ DirectoryIndex index.php
     RewriteEngine On
 
     # Redirect to HTTPS
-    RewriteCond %{ENV:APP_DEV} ^prod$
+    RewriteCond %{ENV:APP_ENV} ^prod$
     RewriteCond %{HTTPS} !=on
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
