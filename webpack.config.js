@@ -1,4 +1,3 @@
-var _ = require('lodash');
 var Encore = require('@symfony/webpack-encore');
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
