@@ -17,6 +17,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/var/www", :mount_options => %w(dmode=777 fmode=777)
 
   config.vm.provision "shell", keep_color: true, privileged: false, inline: <<-'SHELL'
+    composer global require sllh/composer-versions-check
     npm install -g yarn heroku
   SHELL
 end
