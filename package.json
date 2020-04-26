@@ -1,26 +1,27 @@
 {
-  "devDependencies": {
-    "@symfony/webpack-encore": "^0.28.0",
-    "core-js": "^3.3.6",
-    "node-sass": "^4.13.0",
-    "sass-loader": "^8.0.0",
-    "webpack-notifier": "^1.8.0"
-  },
-  "private": true,
-  "scripts": {
-    "dev-server": "encore dev-server",
-    "dev": "encore dev",
-    "watch": "encore dev --watch --watch-poll",
-    "build": "encore production --progress"
-  },
-  "engines": {
-    "node": "12.13.0",
-    "yarn": "1.19.1"
-  },
-  "dependencies": {
-    "bootstrap": "^4.3.1",
-    "chart.js": "^2.9.2",
-    "jquery": "^3.4.1",
-    "lodash": "^4.17.15"
-  }
+    "devDependencies": {
+        "@symfony/webpack-encore": "^0.29.0",
+        "core-js": "^3.0.0",
+        "node-sass": "^4.14.0",
+        "regenerator-runtime": "^0.13.2",
+        "sass-loader": "^7.0.1",
+        "webpack-notifier": "^1.6.0"
+    },
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "engines": {
+        "node": "12.16.2",
+        "yarn": "1.22.4"
+    },
+    "dependencies": {
+        "bootstrap": "^4.4.1",
+        "chart.js": "^2.9.3",
+        "jquery": "^3.5.0",
+        "lodash": "^4.17.15"
+    }
 }

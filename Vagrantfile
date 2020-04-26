@@ -14,10 +14,10 @@ Vagrant.configure("2") do |config|
   config.vm.box = "camurphy/cappuccino"
   config.vm.network "private_network", type: "dhcp"
   config.vm.hostname = "mortgage-tracker.wip"
-  config.vm.synced_folder ".", "/var/www", :mount_options => %w(dmode=777 fmode=777)
+  config.vm.synced_folder ".", "/var/www", type: "nfs"
 
   config.vm.provision "shell", keep_color: true, privileged: false, inline: <<-'SHELL'
     composer global require sllh/composer-versions-check
-    npm install -g yarn heroku
+    npm install -g heroku
   SHELL
 end
