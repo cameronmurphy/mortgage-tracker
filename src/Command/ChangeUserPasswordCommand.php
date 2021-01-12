@@ -73,5 +73,7 @@ class ChangeUserPasswordCommand extends Command
 
         $user->setPassword($encodedPassword);
         $this->entityManager->flush();
+
+        return 0;
     }
 }
