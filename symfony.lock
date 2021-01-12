@@ -71,6 +71,9 @@
     "egulias/email-validator": {
         "version": "2.1.7"
     },
+    "friendsofphp/proxy-manager-lts": {
+        "version": "v1.0.2"
+    },
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
@@ -340,6 +343,9 @@
     },
     "symfony/property-info": {
         "version": "v4.2.2"
+    },
+    "symfony/proxy-manager-bridge": {
+        "version": "v5.2.1"
     },
     "symfony/routing": {
         "version": "4.2",
