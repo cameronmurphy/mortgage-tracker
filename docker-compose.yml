@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  web:
+    build: docker/web
+    volumes:
+      - .:/var/www
+    ports:
+      - '${FORWARD_APP_PORT:-8080}:80'
+    networks:
+      - app
+    depends_on:
+      - pgsql
+  php:
+    build: docker/php
+    volumes:
+      - .:/var/www
+    networks:
+      - app
+  pgsql:
+    image: postgres:13
+    ports:
+      - '${FORWARD_DB_PORT:-5433}:5432'
+    environment:
+      PGPASSWORD: '${DATABASE_PASSWORD:-secret}'
+      POSTGRES_DB: '${DATABASE_NAME}'
+      POSTGRES_USER: '${DATABASE_USER}'
+      POSTGRES_PASSWORD: '${DATABASE_PASSWORD:-secret}'
+    networks:
+      - app
+    volumes:
+      - 'db:/var/lib/postgresql/data'
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "${DATABASE_NAME}", "-U", "${DATABASE_USER}"]
+networks:
+  app:
+    driver: bridge
+volumes:
+  db:
+    driver: local
